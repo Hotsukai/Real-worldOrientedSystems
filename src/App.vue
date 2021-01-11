@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <p>2次元3自由度マニピュレータ</p>
+    <h1>2次元3自由度マニピュレータ</h1>
     <Arm/>
   </div>
 </template>

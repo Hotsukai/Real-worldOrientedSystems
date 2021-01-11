@@ -1,79 +1,73 @@
 <template>
-  <div class="canvas">
+  <div>
     <form>
-      <input
-        v-model.number="thetas[index]"
-        v-for="(theta, index) in thetas"
-        :key="index + 't'"
-        type="number"
-        step="0.05"
-      />rad
+      <div v-for="(theta, index) in thetas" :key="index + 't'">
+        <label>第{{ index + 1 }}関節</label
+        ><input v-model.number="thetas[index]" type="number" step="0.05" />rad
+      </div>
     </form>
+    <div class="canvas">
+      <svg viewBox="-200 -200 1000 1000">
+        <text x="0" y="0" font-family="Verdana" font-size="35">0,0</text>
 
-    <p>{{ p_start_end(0, 0) }}</p>
-    <p>{{ p_start_end(0, 1) }}</p>
-    <p>{{ p_start_end(0, 2) }}</p>
-    <p>{{ p_start_end(0, 3) }}</p>
-    <svg viewBox="0 0 1000 1000">
-      <text x="0" y="0" font-family="Verdana" font-size="35">0,0</text>
-
-      <line
-        :x1="0"
-        :y1="0"
-        :x2="p_start_end(0, 1)[0][0]"
-        :y2="p_start_end(0, 1)[1][0]"
-        stroke="#ff0000"
-        :stroke-width="20 + 'px'"
-      ></line>
-      <text
-        :x="p_start_end(0, 1)[0][0]"
-        :y="p_start_end(0, 1)[1][0]"
-        font-family="Verdana"
-        font-size="35"
-      >
-        {{ coordinateText(p_start_end(0, 1)) }}
-      </text>
-      <line
-        :x1="p_start_end(0, 1)[0][0]"
-        :y1="p_start_end(0, 1)[1][0]"
-        :x2="p_start_end(0, 2)[0][0]"
-        :y2="p_start_end(0, 2)[1][0]"
-        stroke="#00ff00"
-        :stroke-width="20 + 'px'"
-      ></line>
-      <text
-        :x="p_start_end(0, 2)[0][0]"
-        :y="p_start_end(0, 2)[1][0]"
-        font-family="Verdana"
-        font-size="35"
-      >
-        {{ coordinateText(p_start_end(0, 2)) }}
-      </text>
-      <line
-        :x1="p_start_end(0, 2)[0][0]"
-        :y1="p_start_end(0, 2)[1][0]"
-        :x2="p_start_end(0, 3)[0][0]"
-        :y2="p_start_end(0, 3)[1][0]"
-        stroke="#0000ff"
-        :stroke-width="20 + 'px'"
-      ></line>
-      <text
-        :x="p_start_end(0, 3)[0][0]"
-        :y="p_start_end(0, 3)[1][0]"
-        font-family="Verdana"
-        font-size="35"
-      >
-        {{ coordinateText(p_start_end(0, 3)) }}
-      </text>
-      <line
-        :x1="p_start_end(0, 3)[0][0]"
-        :y1="p_start_end(0, 3)[1][0]"
-        :x2="p_start_end(0, 3)[0][0]"
-        :y2="p_start_end(0, 3)[1][0]"
-        stroke="#eaffd0"
-        :stroke-width="20 + 'px'"
-      ></line>
-    </svg>
+        <line
+          :x1="p_start_end(0, 0)[0][0]"
+          :y1="p_start_end(0, 0)[0][0]"
+          :x2="p_start_end(0, 1)[0][0]"
+          :y2="p_start_end(0, 1)[1][0]"
+          stroke="#ff0000"
+          :stroke-width="20 + 'px'"
+        ></line>
+        <text
+          :x="p_start_end(0, 1)[0][0]"
+          :y="p_start_end(0, 1)[1][0]"
+          font-family="Verdana"
+          font-size="35"
+        >
+          {{ coordinateText(p_start_end(0, 1)) }}
+        </text>
+        <line
+          :x1="p_start_end(0, 1)[0][0]"
+          :y1="p_start_end(0, 1)[1][0]"
+          :x2="p_start_end(0, 2)[0][0]"
+          :y2="p_start_end(0, 2)[1][0]"
+          stroke="#00ff00"
+          :stroke-width="20 + 'px'"
+        ></line>
+        <text
+          :x="p_start_end(0, 2)[0][0]"
+          :y="p_start_end(0, 2)[1][0]"
+          font-family="Verdana"
+          font-size="35"
+        >
+          {{ coordinateText(p_start_end(0, 2)) }}
+        </text>
+        <line
+          :x1="p_start_end(0, 2)[0][0]"
+          :y1="p_start_end(0, 2)[1][0]"
+          :x2="p_start_end(0, 3)[0][0]"
+          :y2="p_start_end(0, 3)[1][0]"
+          stroke="#0000ff"
+          :stroke-width="20 + 'px'"
+        ></line>
+        <text
+          :x="p_start_end(0, 3)[0][0]"
+          :y="p_start_end(0, 3)[1][0]"
+          font-family="Verdana"
+          font-size="35"
+        >
+          {{ coordinateText(p_start_end(0, 3)) }}
+        </text>
+        <line
+          :x1="p_start_end(0, 3)[0][0]"
+          :y1="p_start_end(0, 3)[1][0]"
+          :x2="p_start_end(0, 3)[0][0]"
+          :y2="p_start_end(0, 3)[1][0]"
+          stroke="#eaffd0"
+          :stroke-width="20 + 'px'"
+        ></line>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -85,10 +79,10 @@ export default {
       p: [
         [0, 0],
         [0, 200],
-        [0, 200],
-        [0, 200],
+        [0, 150],
+        [0, 100],
       ],
-      thetas: [0, 0, 0],
+      thetas: [-0.75, -1, 1],
     };
   },
   methods: {
@@ -100,16 +94,22 @@ export default {
     //@return [x,y]
     p_start_end(start, end) {
       let resultOfRxP;
-      if (end - start > 1) {
+      if (start > end) {
+        console.error("引数が異常です");
+      } else if (start === end) {
+        return [[this.p[start][0]], [this.p[start][1]]];
+      } else if (end - start > 1) {
         resultOfRxP = this.dot(
           this.rotateMatrix(this.thetas[start]),
           this.p_start_end(start + 1, end)
         );
-      } else {
+      } else if (end - start === 1) {
         resultOfRxP = this.dot(
           this.rotateMatrix(this.thetas[start]),
-          this.transpose([this.p.slice(-1)[0]])
+          this.transpose([this.p[end]])
         );
+      } else {
+        console.error("エラー");
       }
       return [
         [this.p[start][0] + resultOfRxP[0][0]], //x軸
@@ -156,10 +156,9 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .canvas {
-  height: 1000px;
-  width: 1000px;
+  height: 100vh;
+  border: 1px solid #000;
 }
 </style>
