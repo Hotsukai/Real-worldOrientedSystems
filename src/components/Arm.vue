@@ -6,17 +6,70 @@
         v-for="(theta, index) in thetas"
         :key="index + 't'"
         type="number"
-      />度
+        step="0.05"
+      />rad
     </form>
-   
-    x1:{{ p_start_end(0, 0)[0][0] }} b {{ p_start_end(0, 0)[1][0] }} c
-    {{ p_start_end(0, 1)[0][0] }} d {{ p_start_end(0, 1)[1][0] }}
+
+    <p>{{ p_start_end(0, 0) }}</p>
+    <p>{{ p_start_end(0, 1) }}</p>
+    <p>{{ p_start_end(0, 2) }}</p>
+    <p>{{ p_start_end(0, 3) }}</p>
     <svg viewBox="0 0 1000 1000">
+      <text x="0" y="0" font-family="Verdana" font-size="35">0,0</text>
+
+      <line
+        :x1="0"
+        :y1="0"
+        :x2="p_start_end(0, 1)[0][0]"
+        :y2="p_start_end(0, 1)[1][0]"
+        stroke="#ff0000"
+        :stroke-width="20 + 'px'"
+      ></line>
+      <text
+        :x="p_start_end(0, 1)[0][0]"
+        :y="p_start_end(0, 1)[1][0]"
+        font-family="Verdana"
+        font-size="35"
+      >
+        {{ coordinateText(p_start_end(0, 1)) }}
+      </text>
       <line
         :x1="p_start_end(0, 1)[0][0]"
         :y1="p_start_end(0, 1)[1][0]"
         :x2="p_start_end(0, 2)[0][0]"
         :y2="p_start_end(0, 2)[1][0]"
+        stroke="#00ff00"
+        :stroke-width="20 + 'px'"
+      ></line>
+      <text
+        :x="p_start_end(0, 2)[0][0]"
+        :y="p_start_end(0, 2)[1][0]"
+        font-family="Verdana"
+        font-size="35"
+      >
+        {{ coordinateText(p_start_end(0, 2)) }}
+      </text>
+      <line
+        :x1="p_start_end(0, 2)[0][0]"
+        :y1="p_start_end(0, 2)[1][0]"
+        :x2="p_start_end(0, 3)[0][0]"
+        :y2="p_start_end(0, 3)[1][0]"
+        stroke="#0000ff"
+        :stroke-width="20 + 'px'"
+      ></line>
+      <text
+        :x="p_start_end(0, 3)[0][0]"
+        :y="p_start_end(0, 3)[1][0]"
+        font-family="Verdana"
+        font-size="35"
+      >
+        {{ coordinateText(p_start_end(0, 3)) }}
+      </text>
+      <line
+        :x1="p_start_end(0, 3)[0][0]"
+        :y1="p_start_end(0, 3)[1][0]"
+        :x2="p_start_end(0, 3)[0][0]"
+        :y2="p_start_end(0, 3)[1][0]"
         stroke="#eaffd0"
         :stroke-width="20 + 'px'"
       ></line>
@@ -30,15 +83,20 @@ export default {
   data() {
     return {
       p: [
-        [500, 500],
-        [0, 100],
-        [0, 100],
-        [0, 100],
+        [0, 0],
+        [0, 200],
+        [0, 200],
+        [0, 200],
       ],
       thetas: [0, 0, 0],
     };
   },
   methods: {
+    coordinateText(coordinateArray) {
+      return `(x,y)=(${Math.round(coordinateArray[0][0] * 10) / 10},${
+        Math.round(coordinateArray[1][0] * 10) / 10
+      })`;
+    },
     //@return [x,y]
     p_start_end(start, end) {
       let resultOfRxP;
@@ -67,14 +125,7 @@ export default {
       var rowCountMatrix2 = matrix2.length;
       var colCountMatrix1 = matrix1[0].length;
       var colCountMatrix2 = matrix2[0].length;
-      console.debug("matrixes : ", matrix1, matrix2);
-      console.debug(
-        "lengthes : ",
-        rowCountMatrix1,
-        rowCountMatrix2,
-        colCountMatrix1,
-        colCountMatrix2
-      );
+
       if (colCountMatrix1 !== rowCountMatrix2) {
         console.error("行列が不正です");
         return -1000;
@@ -98,11 +149,6 @@ export default {
       ];
     },
     transpose(a) {
-      console.debug("transpose before : " + JSON.stringify(a));
-      console.debug(
-        "transpose after : " +
-          JSON.stringify(a[0].map((_, c) => a.map((r) => r[c])))
-      );
       return a[0].map((_, c) => a.map((r) => r[c]));
     },
   },
