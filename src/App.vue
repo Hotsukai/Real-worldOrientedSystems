@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>2次元3自由度マニピュレータ</p>
+    <Arm/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Arm from './components/Arm.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Arm
+  },
 }
 </script>
 
